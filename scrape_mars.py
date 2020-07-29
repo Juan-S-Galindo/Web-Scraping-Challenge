@@ -2,6 +2,7 @@
 #Web Scraping tools 
 from bs4 import BeautifulSoup as bs
 from selenium import webdriver
+#from splinter import Browser
 
 #DataFrame tools
 import pandas as pd
@@ -17,6 +18,9 @@ def init_browser():
     options = webdriver.ChromeOptions()
     options.add_argument('headless')
 
+    #Splinter option - using absolute path
+    #executable_path = {'executable_path': '/Users/Sebastian/Documents/GitHub/Data Visualization Bootcamp/Sebastian Homework/Web-Scraping-Challenge/chromedriver'}
+    #browser = Browser('chrome', **executable_path, headless = True)
     #path to the driver and load the options.
     browser = webdriver.Chrome("/Users/Sebastian/Documents/GitHub/Data Visualization Bootcamp/Sebastian Homework/Web-Scraping-Challenge/chromedriver",chrome_options = options)
 
@@ -35,11 +39,17 @@ def scrapper():
 
         url = "https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&year=2020%3Apublish_date&category=19%2C165%2C184%2C204&blank_scope=Latest"
 
+        #splinter option - open url
+        #browser.visit(url)
+
         #Open url.
         browser.get(url)
 
         #Time to let the website load all the elements
-        time.sleep(4)   
+        time.sleep(4)  
+
+        #splinter option - save HTML 
+        #html = browser.html 
 
         #save the html source.
         html = browser.page_source
@@ -62,14 +72,24 @@ def scrapper():
 
         url = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
 
+        #splinter option - open url
+        #browser.visit(url)
+
         #Opens the url.
         browser.get(url)
+
+        #splinter option - FULL IMAGE BUTTON
+        #browser.click_link_by_id("full_image")
 
         #Interact with the FULL IMAGE BUTTON
         browser.find_element_by_id("full_image").click()
 
         time.sleep(4)
 
+        #splinter option - save HTML 
+        #html = browser.html 
+
+        #save the html source.
         html = browser.page_source
 
         #Use bs4 to parse the html response.
@@ -85,12 +105,18 @@ def scrapper():
     #Mars Weather ------------------------------------------------------------------------------------------------------------------------
     try:
         url = "https://twitter.com/marswxreport?lang=en"
+        
+        #splinter option - open url
+        #browser.visit(url)
 
         #Open the url.
         browser.get(url)
 
         #Time to let the website load all the elements
         time.sleep(4)
+
+        #splinter option - save HTML 
+        #html = browser.html 
 
         #save the html source.
         html = browser.page_source
@@ -141,11 +167,18 @@ def scrapper():
 
         url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
 
+        #splinter option - open url
+        #browser.visit(url)
+
         #Opens the url.
         browser.get(url)
 
         time.sleep(4)
 
+        #splinter option - save HTML 
+        #html = browser.html 
+
+        #save the html source.
         html = browser.page_source
 
         # close web browser
